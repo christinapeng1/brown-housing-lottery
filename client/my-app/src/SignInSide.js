@@ -13,10 +13,20 @@ import { GoogleButton } from 'react-google-button'
 import {UserAuth} from './context/AuthContext';
 import "./components/Header.css";
 
-const backgroundImages = [backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4];
+const backgroundImages = [
+  backgroundImage1,
+  backgroundImage2,
+  backgroundImage3,
+  backgroundImage4,
+];
+
+export function getImageIndex(){
+  return 1;
+  return Math.floor(Math.random() * bgArray.length);
+}
 
 const randomBackgroundImage =
-  backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+  backgroundImages[getImageIndex(backgroundImages)];
 
 const defaultTheme = createTheme();
 
