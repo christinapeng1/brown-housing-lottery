@@ -20,8 +20,7 @@ const backgroundImages = [
   backgroundImage4,
 ];
 
-export function getImageIndex(){
-  return 1;
+export function getImageIndex(bgArray){
   return Math.floor(Math.random() * bgArray.length);
 }
 
