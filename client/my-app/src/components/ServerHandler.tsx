@@ -74,16 +74,17 @@ export function fetchAPIView(): Promise<Room[]> {
       if (!responseObject.responseMap) {
         throw new Error("Invalid data format: responseMap not found");
       }
-      
+
       // Accessing the array of arrays representing CSV rows
-      const csvData: any[][] = responseObject.responseMap[Object.keys(responseObject.responseMap)[0]];
+      const csvData: any[][] =
+        responseObject.responseMap[Object.keys(responseObject.responseMap)[0]];
 
       // Parsing CSV rows into Room objects
       const rooms: Room[] = csvData.slice(1).map((row: any[]) => ({
         dormName: row[0],
         roomNumber: row[3],
         roomType: row[5],
-        buildingName: row[0] // Assuming building name is the same as dorm name
+        buildingName: row[0], // Assuming building name is the same as dorm name
       }));
 
       console.log("Room Data:", rooms); // Log the room data
@@ -95,8 +96,6 @@ export function fetchAPIView(): Promise<Room[]> {
     });
 }
 
-
-
 /**
  * This function returns a Promise to search for specific data in the CSV
  * @param searchValue
@@ -105,7 +104,7 @@ export function fetchAPIView(): Promise<Room[]> {
  * @param columnType
  * @returns
  */
-export function fetchAPISearch(building: string) {
+export function fetchAPISearch(building: string): Promise<Room[]> {
   return fetch(`http://localhost:5556/searchcsv?target=${building}`)
     .then((response) => {
       if (!response.ok) {
@@ -114,13 +113,36 @@ export function fetchAPISearch(building: string) {
       return response.json();
     })
     .then((responseObject) => {
-      const result = JSONtoTable(responseObject);
-      console.log(result);
-      return result;
+      const rooms: Room[] = [];
+
+      // Iterate over the keys of responseMap
+      for (const buildingId in responseObject.responseMap) {
+        if (
+          Object.prototype.hasOwnProperty.call(
+            responseObject.responseMap,
+            buildingId
+          )
+        ) {
+          const csvData: any[][] = responseObject.responseMap[buildingId];
+
+          // Parse CSV rows for each building into Room objects
+          const buildingRooms: Room[] = csvData.slice(1).map((row: any[]) => ({
+            dormName: row[0],
+            roomNumber: row[3],
+            roomType: row[5],
+            buildingName: row[0], // Assuming building name is the same as dorm name
+          }));
+
+          // Add the parsed rooms for the current building to the main rooms array
+          rooms.push(...buildingRooms);
+        }
+      }
+
+      console.log("Search Result:", rooms);
+      return rooms;
     })
     .catch((error) => {
       console.error("Error:", error);
-      console.log(building);
       throw error;
     });
 }
