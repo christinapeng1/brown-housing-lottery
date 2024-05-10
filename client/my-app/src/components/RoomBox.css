@@ -7,7 +7,7 @@
 }
 
 .box {
-  flex: 1 1 300px;
+  flex: 0 0 300px; /* Boxes will always be 300px wide */
   background-color: antiquewhite;
   text-align: center;
   margin: 12px;
