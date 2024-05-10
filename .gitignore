@@ -2,7 +2,7 @@
 .idea
 
 # Maven
-server/target/
+target/
 .mvn
 .mvn-classpath
 pom.xml.bak
