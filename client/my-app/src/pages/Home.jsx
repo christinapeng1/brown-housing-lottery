@@ -28,6 +28,21 @@ export default function Home() {
   //   }
   // };
 
+  useEffect(() => {
+    const storedFilePath = localStorage.getItem("filePath");
+    if (storedFilePath) {
+      setFilePath(storedFilePath);
+    }
+  }, []);
+
+  // Function to handle changes in the filepath input field
+  const handleFilePathChange = (e) => {
+    const value = e.target.value;
+    setFilePath(value);
+    // Store the filepath value in localStorage
+    localStorage.setItem("filePath", value);
+  };
+
   // Load file data when the component mounts
   const loadFileData = async () => {
     try {
@@ -41,9 +56,9 @@ export default function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   viewData(); // Call the function to fetch room data
-  // }, [building, roomType]);
+  useEffect(() => {
+    viewData();
+  }, [building, roomType]);
 
   const viewData = async () => {
     // Fetch and set room data when "View" button is clicked
@@ -167,15 +182,15 @@ export default function Home() {
           onChange={(e) => setBuilding(e.target.value)}
         />
         {/* Filepath input */}
-        <h3> Enter file path:</h3>
+        <h3> File path:</h3>
         <input
           className="options"
           type="text"
           value={filePath}
-          onChange={(e) => setFilePath(e.target.value)}
+          onChange={handleFilePathChange}
         />
         {/* Load file button */}
-        <button onClick={loadFileData}>Load file</button>
+        <button onClick={loadFileData}>Load/View</button>
         {/* Filter button to trigger the data fetching
         <button onClick={handleViewClick}>View</button>
         <button onClick={handleFilterClick}>Filter</button>*/}
