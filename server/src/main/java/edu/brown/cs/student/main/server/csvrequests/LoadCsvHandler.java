@@ -108,7 +108,7 @@ public class LoadCsvHandler implements Route {
   /** Response object to send if the file is not found */
   public record FileNotFoundFailureResponse(String response_type) {
     public FileNotFoundFailureResponse() {
-      this("File not found at the given address.");
+      this("error_datasource");
     }
     /**
      * @return this response, serialized as Json
@@ -122,7 +122,7 @@ public class LoadCsvHandler implements Route {
   /** Response object to send if the file is outside the data directory */
   public record FileSecurityFailureResponse(String response_type) {
     public FileSecurityFailureResponse() {
-      this("You don't have permission to access this file.");
+      this("error_datasource");
     }
     /**
      * @return this response, serialized as Json
@@ -138,7 +138,7 @@ public class LoadCsvHandler implements Route {
    */
   public record BadRequestFailureResponse(String response_type) {
     public BadRequestFailureResponse() {
-      this("The request is missing a field, or the field is ill-formed.");
+      this("error_bad_request");
     }
     /**
      * @return this response, serialized as Json
@@ -152,7 +152,7 @@ public class LoadCsvHandler implements Route {
   /** Response object to send if the request is malformed */
   public record BadJsonFailureResponse(String response_type) {
     public BadJsonFailureResponse() {
-      this("error_bad_json (the request is malformed)");
+      this("error_bad_json");
     }
     /**
      * @return this response, serialized as Json
