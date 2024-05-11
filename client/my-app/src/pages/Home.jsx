@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import "../components/Home.css";
 import RoomBox from "../components/RoomBox.jsx";
 import Footer from "../components/Footer.jsx";
-
-import {
-  fetchAPISearch,
-  fetchAPILoad,
-  fetchAPIView,
-} from "../components/ServerHandler.tsx";
 
 export default function Home() {
   const [availability, setAvailability] = useState(""); // State to hold the availability value
@@ -167,7 +161,7 @@ export default function Home() {
           <option value="single">Single</option>
           <option value="double">Double</option>
           <option value="triple">Triple</option>
-          <option value="suite">Suite</option>
+          <option value="quad">Suite</option>
         </select>
         <h3> Building:</h3>
         <input

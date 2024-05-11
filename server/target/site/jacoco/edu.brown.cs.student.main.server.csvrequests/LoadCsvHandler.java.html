@@ -106,53 +106,53 @@ public class LoadCsvHandler implements Route {
   }
 
   /** Response object to send if the file is not found */
-<span class="nc" id="L109">  public record FileNotFoundFailureResponse(String response_type) {</span>
+<span class="fc" id="L109">  public record FileNotFoundFailureResponse(String response_type) {</span>
     public FileNotFoundFailureResponse() {
-<span class="nc" id="L111">      this(&quot;File not found at the given address.&quot;);</span>
-<span class="nc" id="L112">    }</span>
+<span class="fc" id="L111">      this(&quot;error_datasource&quot;);</span>
+<span class="fc" id="L112">    }</span>
     /**
      * @return this response, serialized as Json
      */
     String serialize() {
-<span class="nc" id="L117">      Moshi moshi = new Moshi.Builder().build();</span>
-<span class="nc" id="L118">      return moshi.adapter(FileNotFoundFailureResponse.class).toJson(this);</span>
+<span class="fc" id="L117">      Moshi moshi = new Moshi.Builder().build();</span>
+<span class="fc" id="L118">      return moshi.adapter(FileNotFoundFailureResponse.class).toJson(this);</span>
     }
   }
 
   /** Response object to send if the file is outside the data directory */
-<span class="nc" id="L123">  public record FileSecurityFailureResponse(String response_type) {</span>
+<span class="fc" id="L123">  public record FileSecurityFailureResponse(String response_type) {</span>
     public FileSecurityFailureResponse() {
-<span class="nc" id="L125">      this(&quot;You don't have permission to access this file.&quot;);</span>
-<span class="nc" id="L126">    }</span>
+<span class="fc" id="L125">      this(&quot;error_datasource&quot;);</span>
+<span class="fc" id="L126">    }</span>
     /**
      * @return this response, serialized as Json
      */
     String serialize() {
-<span class="nc" id="L131">      Moshi moshi = new Moshi.Builder().build();</span>
-<span class="nc" id="L132">      return moshi.adapter(FileSecurityFailureResponse.class).toJson(this);</span>
+<span class="fc" id="L131">      Moshi moshi = new Moshi.Builder().build();</span>
+<span class="fc" id="L132">      return moshi.adapter(FileSecurityFailureResponse.class).toJson(this);</span>
     }
   }
 
   /**
    * Response object to send if the request was missing a needed field, or the field was ill-formed
    */
-<span class="nc" id="L139">  public record BadRequestFailureResponse(String response_type) {</span>
+<span class="fc" id="L139">  public record BadRequestFailureResponse(String response_type) {</span>
     public BadRequestFailureResponse() {
-<span class="nc" id="L141">      this(&quot;The request is missing a field, or the field is ill-formed.&quot;);</span>
-<span class="nc" id="L142">    }</span>
+<span class="fc" id="L141">      this(&quot;error_bad_request&quot;);</span>
+<span class="fc" id="L142">    }</span>
     /**
      * @return this response, serialized as Json
      */
     String serialize() {
-<span class="nc" id="L147">      Moshi moshi = new Moshi.Builder().build();</span>
-<span class="nc" id="L148">      return moshi.adapter(BadRequestFailureResponse.class).toJson(this);</span>
+<span class="fc" id="L147">      Moshi moshi = new Moshi.Builder().build();</span>
+<span class="fc" id="L148">      return moshi.adapter(BadRequestFailureResponse.class).toJson(this);</span>
     }
   }
 
   /** Response object to send if the request is malformed */
 <span class="nc" id="L153">  public record BadJsonFailureResponse(String response_type) {</span>
     public BadJsonFailureResponse() {
-<span class="nc" id="L155">      this(&quot;error_bad_json (the request is malformed)&quot;);</span>
+<span class="nc" id="L155">      this(&quot;error_bad_json&quot;);</span>
 <span class="nc" id="L156">    }</span>
     /**
      * @return this response, serialized as Json
