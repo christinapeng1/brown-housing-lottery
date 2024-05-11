@@ -167,8 +167,7 @@ export default function Home() {
           <option value="single">Single</option>
           <option value="double">Double</option>
           <option value="triple">Triple</option>
-          <option value="quad">Quad</option>
-          <option value="suite">Suite/Apartment</option>
+          <option value="suite">Suite</option>
         </select>
         <h3> Building:</h3>
         <input
