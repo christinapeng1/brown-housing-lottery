@@ -54,6 +54,73 @@ export default function Home() {
     loadFileData(); // Call the function to load file data
   }, []);
 
+  const mockData = [
+    {
+      roomNumber: "BARBOUR 080 081-1",
+      roomType: "Double (Suite/Apartment)",
+      buildingName: "BARBOUR HALL",
+    },
+    {
+      roomNumber: "BARBOUR 080 081-2",
+      roomType: "Double (Suite/Apartment)",
+      buildingName: "BARBOUR HALL",
+    },
+    {
+      roomNumber: "MINDEN 308-1",
+      roomType: "Double",
+      buildingName: "MINDEN HALL",
+    },
+    {
+      roomNumber: "MINDEN 308-2",
+      roomType: "Double",
+      buildingName: "MINDEN HALL",
+    },
+    {
+      roomNumber: "SLATER 201-1",
+      roomType: "Quad",
+      buildingName: "SLATER HALL",
+    },
+    {
+      roomNumber: "SLATER 201-2",
+      roomType: "Quad",
+      buildingName: "SLATER HALL",
+    },
+    {
+      roomNumber: "SLATER 201-3",
+      roomType: "Quad",
+      buildingName: "SLATER HALL",
+    },
+    {
+      roomNumber: "SLATER 206-1",
+      roomType: "Single",
+      buildingName: "SLATER HALL",
+    },
+    {
+      roomNumber: "GREG A 611-1",
+      roomType: "Triple",
+      buildingName: "GREGORIAN QUAD A",
+    },
+    {
+      roomNumber: "GREG A 611-2",
+      roomType: "Triple",
+      buildingName: "GREGORIAN QUAD A",
+    },
+  ];
+
+  const filteredMockData = mockData.filter(
+    (room) =>
+      room.roomNumber.toLowerCase().includes(building.toLowerCase()) &&
+      room.roomType.toLowerCase().includes(roomType.toLowerCase())
+  );
+
+  const roomBox = filteredMockData.map((room) => (
+    <RoomBox
+      roomNumber={room.roomNumber}
+      roomType={room.roomType}
+      buildingName={room.buildingName}
+    />
+  ));
+
   return (
     <>
       <Header />
@@ -64,20 +131,20 @@ export default function Home() {
       </div>
       <div className="filter-banner">
         <h1>Filter rooms: </h1>
-        <h3> Availability:</h3>
+        {/*<h3> Availability:</h3>
         <input
           className="options"
           type="Availability"
           value={availability}
           onChange={(e) => setAvailability(e.target.value)}
-        />
+        />*/}
         <h3> Room type:</h3>
         <select
           className="options"
           value={roomType}
           onChange={(e) => setRoomType(e.target.value)}
         >
-          <option value="any">Any</option>
+          <option value="">Any</option>
           <option value="single">Single</option>
           <option value="double">Double</option>
           <option value="triple">Triple</option>
@@ -90,17 +157,14 @@ export default function Home() {
           value={building}
           onChange={(e) => setBuilding(e.target.value)}
         />
-        {/* Filter button to trigger the data fetching */}
+        {/* Filter button to trigger the data fetching 
         <button onClick={handleViewClick}>View</button>
-        <button onClick={handleFilterClick}>Filter</button>
+        <button onClick={handleFilterClick}>Filter</button>*/}
         {/* Display the filtered data */}
         {/* Render room boxes using room data */}
-        {filteredData.map((room, index) => (
-          <RoomBox key={index} room={room} />
-        ))}
         {/* <div dangerouslySetInnerHTML={{ __html: filteredData }}></div> */}
       </div>
-      <RoomBox />
+      <div className="box-container">{roomBox}</div>
       <Footer />
     </>
   );
