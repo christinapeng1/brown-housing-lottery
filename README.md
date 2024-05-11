@@ -83,7 +83,7 @@ Risks include operational challenges in ResLife adoption and technical limitatio
 
 - **ResLife CSV Data (Model):** Test parsing and integration with other modules.
 - **Frontend Website (View):** Test UI functionality and accessibility.
-- **Update Rooms (Controller):** Test comparison algorithm and integration with frontend.
+- **Update Rooms (Controller):** Test filtering algorithm and integration with frontend.
 
 ## How to...
 
