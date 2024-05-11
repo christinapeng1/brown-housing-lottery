@@ -139,12 +139,6 @@ export default function Home() {
     },
   ];
 
-  // const filteredMockData = mockData.filter(
-  //   (room) =>
-  //     room.roomNumber.toLowerCase().includes(building.toLowerCase()) &&
-  //     room.roomType.toLowerCase().includes(roomType.toLowerCase())
-  // );
-
   return (
     <>
       <Header />
