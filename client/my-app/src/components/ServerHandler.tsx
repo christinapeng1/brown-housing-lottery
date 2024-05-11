@@ -71,6 +71,7 @@ export function fetchAPIView(): Promise<Room[]> {
       return response.json(); // Parsing JSON response
     })
     .then((responseObject) => {
+      console.log(responseObject);
       if (!responseObject.responseMap) {
         throw new Error("Invalid data format: responseMap not found");
       }
@@ -78,6 +79,8 @@ export function fetchAPIView(): Promise<Room[]> {
       // Accessing the array of arrays representing CSV rows
       const csvData: any[][] =
         responseObject.responseMap[Object.keys(responseObject.responseMap)[0]];
+      console.log("CSV DATA");
+      console.log(csvData);
 
       // Parsing CSV rows into Room objects
       const rooms: Room[] = csvData.slice(1).map((row: any[]) => ({
@@ -113,32 +116,26 @@ export function fetchAPISearch(building: string): Promise<Room[]> {
       return response.json();
     })
     .then((responseObject) => {
-      const rooms: Room[] = [];
-
-      // Iterate over the keys of responseMap
-      for (const buildingId in responseObject.responseMap) {
-        if (
-          Object.prototype.hasOwnProperty.call(
-            responseObject.responseMap,
-            buildingId
-          )
-        ) {
-          const csvData: any[][] = responseObject.responseMap[buildingId];
-
-          // Parse CSV rows for each building into Room objects
-          const buildingRooms: Room[] = csvData.slice(1).map((row: any[]) => ({
-            dormName: row[0],
-            roomNumber: row[3],
-            roomType: row[5],
-            buildingName: row[0], // Assuming building name is the same as dorm name
-          }));
-
-          // Add the parsed rooms for the current building to the main rooms array
-          rooms.push(...buildingRooms);
-        }
+      console.log(responseObject);
+      if (!responseObject.responseMap) {
+        throw new Error("Invalid data format: responseMap not found");
       }
 
-      console.log("Search Result:", rooms);
+      // Accessing the array of arrays representing CSV rows
+      const csvData: any[][] =
+        responseObject.responseMap[Object.keys(responseObject.responseMap)[0]];
+
+      console.log(csvData);
+
+      // Parsing CSV rows into Room objects
+      const rooms: Room[] = csvData.map((row: any[]) => ({
+        dormName: row[0],
+        roomNumber: row[3],
+        roomType: row[5],
+        buildingName: row[0], // Assuming building name is the same as dorm name
+      }));
+
+      console.log("Room Data:", rooms); // Log the room data
       return rooms;
     })
     .catch((error) => {
