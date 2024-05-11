@@ -158,6 +158,7 @@ export default function Home() {
         />*/}
         <h3> Room type:</h3>
         <select
+          id="roomType"
           className="options"
           value={roomType}
           onChange={(e) => setRoomType(e.target.value)}
@@ -170,14 +171,16 @@ export default function Home() {
         </select>
         <h3> Building:</h3>
         <input
+          id="building"
           className="options"
-          type="Building"
+          type="text"
           value={building}
           onChange={(e) => setBuilding(e.target.value)}
         />
         {/* Filepath input */}
         <h3> File path:</h3>
         <input
+          id="filePath"
           className="options"
           type="text"
           value={filePath}
