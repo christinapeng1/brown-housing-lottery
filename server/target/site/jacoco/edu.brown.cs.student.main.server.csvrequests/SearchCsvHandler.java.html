@@ -1,42 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <link
-      rel="stylesheet"
-      href="../jacoco-resources/report.css"
-      type="text/css"
-    />
-    <link
-      rel="shortcut icon"
-      href="../jacoco-resources/report.gif"
-      type="image/gif"
-    />
-    <title>SearchCsvHandler.java</title>
-    <link
-      rel="stylesheet"
-      href="../jacoco-resources/prettify.css"
-      type="text/css"
-    />
-    <script
-      type="text/javascript"
-      src="../jacoco-resources/prettify.js"
-    ></script>
-  </head>
-  <body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
-    <div class="breadcrumb" id="breadcrumb">
-      <span class="info"
-        ><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span
-      ><a href="../index.html" class="el_report">s0</a> &gt;
-      <a href="index.source.html" class="el_package"
-        >edu.brown.cs.student.main.server.csvrequests</a
-      >
-      &gt; <span class="el_source">SearchCsvHandler.java</span>
-    </div>
-    <h1>SearchCsvHandler.java</h1>
-    <pre
-      class="source lang-java linenums"
-    >package edu.brown.cs.student.main.server.csvrequests;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchCsvHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s0</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.student.main.server.csvrequests</a> &gt; <span class="el_source">SearchCsvHandler.java</span></div><h1>SearchCsvHandler.java</h1><pre class="source lang-java linenums">package edu.brown.cs.student.main.server.csvrequests;
 
 import com.squareup.moshi.*;
 import edu.brown.cs.student.main.csv.creatorfromrow.CreatorFromRow;
@@ -77,7 +39,7 @@ public class SearchCsvHandler implements Route {
 <span class="nc bnc" id="L39" title="All 6 branches missed.">      if (header != null &amp;&amp; target != null &amp;&amp; !this.csvFile.isEmpty()) {</span>
 <span class="nc" id="L40">        List&lt;String&gt; firstRow = loadedFile.get(0);</span>
 <span class="nc bnc" id="L41" title="All 2 branches missed.">        for (int i = 0; i &lt; firstRow.size(); i++) {</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">          if (firstRow.get(i).equals(header)) {</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">          if (firstRow.get(i).toLowerCase().contains(header.toLowerCase())) {</span>
 <span class="nc" id="L43">            this.searchByColumnIndex(loadedFile, target, i, responseMap);</span>
           }
         }
@@ -86,7 +48,7 @@ public class SearchCsvHandler implements Route {
 <span class="nc bnc" id="L48" title="All 4 branches missed.">      } else if (target != null &amp;&amp; !this.csvFile.isEmpty()) {</span>
 <span class="nc bnc" id="L49" title="All 2 branches missed.">        for (int i = 0; i &lt; loadedFile.size(); i++) {</span>
 <span class="nc bnc" id="L50" title="All 2 branches missed.">          for (String word : loadedFile.get(i)) {</span>
-<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (word.equals(target)) {</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (word.toLowerCase().contains(target.toLowerCase())) {</span>
 <span class="nc" id="L52">              responseMap.put(String.valueOf(i), loadedFile.get(i));</span>
 <span class="nc" id="L53">              break;</span>
             }
@@ -113,7 +75,7 @@ public class SearchCsvHandler implements Route {
       Map&lt;String, Object&gt; responseMap) {
     try {
 <span class="nc bnc" id="L77" title="All 2 branches missed.">      for (int i = 0; i &lt; file.size(); i++) {</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (file.get(i).get(columnIndex).equals(toSearch)) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (file.get(i).get(columnIndex).contains(toSearch)) {</span>
 <span class="nc" id="L79">          responseMap.put(String.valueOf(i), file.get(i));</span>
         }
       }
@@ -151,18 +113,9 @@ public class SearchCsvHandler implements Route {
 <span class="nc" id="L113">    }</span>
 
     String serialize() {
-<span class="nc" id="L115">      Moshi moshi = new Moshi.Builder().build();</span>
-<span class="nc" id="L116">      return moshi.adapter(SoupNoRecipesFailureResponse.class).toJson(this);</span>
+<span class="nc" id="L116">      Moshi moshi = new Moshi.Builder().build();</span>
+<span class="nc" id="L117">      return moshi.adapter(SoupNoRecipesFailureResponse.class).toJson(this);</span>
     }
   }
 }
-</pre>
-    <div class="footer">
-      <span class="right"
-        >Created with
-        <a href="http://www.jacoco.org/jacoco">JaCoCo</a>
-        0.8.8.202204050719</span
-      >
-    </div>
-  </body>
-</html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

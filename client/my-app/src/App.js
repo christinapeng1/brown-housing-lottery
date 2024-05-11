@@ -11,7 +11,7 @@ export default function App() {
   const { isSignedIn } = useContext(AuthContext);
 
   return (
-    <div>
+    <div data-testid="app-component">
       <BrowserRouter>
         {isSignedIn ? (
           <Routes>

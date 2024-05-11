@@ -1,6 +1,9 @@
-import { expect, test } from "vitest";
-import getImageIndex from "./src/SignInSide";
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
-test("randomly generates a image index within the length of the background images list", () => {
-  expect(getImageIndex()).toBe(1);
+test('renders App component', () => {
+  render(<App />);
+  // Check for an element specific to your application
+  const appComponent = screen.getByTestId('app-component');
+  expect(appComponent).toBeInTheDocument();
 });
