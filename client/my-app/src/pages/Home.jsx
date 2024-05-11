@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { fetchAPILoad, fetchAPIView } from "./api";
 import Header from "../components/Header";
 import "../components/Home.css";
 import RoomBox from "../components/RoomBox.jsx";
