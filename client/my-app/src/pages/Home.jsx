@@ -101,8 +101,6 @@ export default function Home() {
         {/* <div dangerouslySetInnerHTML={{ __html: filteredData }}></div> */}
       </div>
       <RoomBox />
-      <RoomBox />
-      <RoomBox />
       <Footer />
     </>
   );
