@@ -15,44 +15,61 @@ export default function Home() {
   const [building, setBuilding] = useState(""); // State to hold the building value
   const [roomType, setRoomType] = useState(""); // State to hold the room type value
   const [filteredData, setFilteredData] = useState([]); // State to hold the filtered data
+  const [roomBox, setRoomBox] = useState([]); // Define roomBox state
+  const [filePath, setFilePath] = useState("");
 
-  // Fetch and set room data when "View" button is clicked
-  const handleViewClick = async () => {
+  // const handleFilterClick = async () => {
+  //   try {
+  //     const data = await fetchAPISearch(building);
+  //     console.log("Filtered Data:", data); // Log the filtered data
+  //     setFilteredData(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // Load file data when the component mounts
+  const loadFileData = async () => {
+    try {
+      // Fetch file data from the server
+      await fetchAPILoad(filePath);
+      viewData();
+      //"/Users/kseniiadolgopolova/Desktop/Browncoursework/CS0320/brown-housing-lottery/server/data/Sheet 2-Housing.csv"
+      console.log("File data loaded successfully.");
+    } catch (error) {
+      console.error("Error loading file data:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   viewData(); // Call the function to fetch room data
+  // }, [building, roomType]);
+
+  const viewData = async () => {
+    // Fetch and set room data when "View" button is clicked
     try {
       const data = await fetchAPIView();
       console.log("Room Data:", data); // Log the room data
-      setFilteredData(data);
+      //setFilteredData(data);
+
+      const filteredRooms = data.filter(
+        (room) =>
+          room.roomNumber.toLowerCase().includes(building.toLowerCase()) &&
+          room.roomType.toLowerCase().includes(roomType.toLowerCase())
+      );
+
+      const roomBox = filteredRooms.map((room) => (
+        <RoomBox
+          roomNumber={room.roomNumber}
+          roomType={room.roomType}
+          buildingName={room.buildingName}
+        />
+      ));
+      setRoomBox(roomBox);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
-  const handleFilterClick = async () => {
-    try {
-      const data = await fetchAPISearch(building);
-      console.log("Filtered Data:", data); // Log the filtered data
-      setFilteredData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  // Load file data when the component mounts
-  useEffect(() => {
-    const loadFileData = async () => {
-      try {
-        // Fetch file data from the server
-        await fetchAPILoad(
-          "/Users/kseniiadolgopolova/Desktop/Browncoursework/CS0320/brown-housing-lottery/server/data/Sheet 2-Housing.csv"
-        );
-        console.log("File data loaded successfully.");
-      } catch (error) {
-        console.error("Error loading file data:", error);
-      }
-    };
-
-    loadFileData(); // Call the function to load file data
-  }, []);
 
   const mockData = [
     {
@@ -107,19 +124,11 @@ export default function Home() {
     },
   ];
 
-  const filteredMockData = mockData.filter(
-    (room) =>
-      room.roomNumber.toLowerCase().includes(building.toLowerCase()) &&
-      room.roomType.toLowerCase().includes(roomType.toLowerCase())
-  );
-
-  const roomBox = filteredMockData.map((room) => (
-    <RoomBox
-      roomNumber={room.roomNumber}
-      roomType={room.roomType}
-      buildingName={room.buildingName}
-    />
-  ));
+  // const filteredMockData = mockData.filter(
+  //   (room) =>
+  //     room.roomNumber.toLowerCase().includes(building.toLowerCase()) &&
+  //     room.roomType.toLowerCase().includes(roomType.toLowerCase())
+  // );
 
   return (
     <>
@@ -157,7 +166,17 @@ export default function Home() {
           value={building}
           onChange={(e) => setBuilding(e.target.value)}
         />
-        {/* Filter button to trigger the data fetching 
+        {/* Filepath input */}
+        <h3> Enter file path:</h3>
+        <input
+          className="options"
+          type="text"
+          value={filePath}
+          onChange={(e) => setFilePath(e.target.value)}
+        />
+        {/* Load file button */}
+        <button onClick={loadFileData}>Load file</button>
+        {/* Filter button to trigger the data fetching
         <button onClick={handleViewClick}>View</button>
         <button onClick={handleFilterClick}>Filter</button>*/}
         {/* Display the filtered data */}

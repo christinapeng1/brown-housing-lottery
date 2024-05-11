@@ -129,7 +129,6 @@ export function fetchAPISearch(building: string): Promise<Room[]> {
 
       // Parsing CSV rows into Room objects
       const rooms: Room[] = csvData.map((row: any[]) => ({
-        dormName: row[0],
         roomNumber: row[3],
         roomType: row[5],
         buildingName: row[0], // Assuming building name is the same as dorm name
