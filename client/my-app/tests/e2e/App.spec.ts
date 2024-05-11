@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-
 test("on page load, input fields are visible", async ({ page }) => {
   await page.goto("http://localhost:3000/");
   const buildingInput = await page.isVisible('input[type="text"]');
@@ -69,3 +68,27 @@ test("after loading file, file path is stored in localStorage", async ({
   expect(storedFilePath).toBe("server/data/Sheet 2-Housing.csv");
 });
 
+test("loaddata followed by filter data", async ({ page }) => {
+  await page.goto("http://localhost:3000/");
+  await page.fill('input[type="text"]', "/path/to/file.csv");
+  await page.click('button:has-text("Load/View")');
+  await page.waitForSelector(".box-container");
+  const roomBox1 = await page.isVisible(".room-box");
+  expect(roomBox1).toBeTruthy();
+
+  await page.selectOption("select", { label: "Single" });
+  await page.fill('input[type="text"]', "Minden");
+  await page.waitForSelector(".box-container");
+  const roomBox2 = await page.isVisible(".room-box");
+  expect(page.getByText("Minden 301")).toBeVisible();
+  expect(roomBox1).toBeFalsy();
+  expect(roomBox2).toBeTruthy();
+
+  await page.selectOption("select", { label: "Double" });
+  await page.fill('input[type="text"]', "Barbour");
+  await page.waitForSelector(".box-container");
+  const roomBox3 = await page.isVisible(".room-box");
+  expect(page.getByText("Barbour 080")).toBeVisible();
+  expect(roomBox2).toBeFalsy();
+  expect(roomBox3).toBeTruthy();
+});

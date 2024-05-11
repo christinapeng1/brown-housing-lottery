@@ -9,10 +9,10 @@
 **Project Name:** Housing Lottery  
 **Team Members:**
 
-- Kseniia Dolgopolova [@kdolgopo]: Gathering information from ResLife, work on information retrieval from server, user interface
-- Christina Peng [@jpeng29]: Display changes in file to users, user interface
-- Havi Nguyen [@hnguy116]: Clean and format CSV, user interface
-- Jack Xu [@jackshuxu]: Load file to users, implement filtering functionality, user interface  
+- Kseniia Dolgopolova [@kdolgopo]: Gathering information from ResLife, information retrieval from server, testing
+- Christina Peng [@jpeng29]: User interface, authentication
+- Havi Nguyen [@hnguy116]: User interface
+- Jack Xu [@jackshuxu]: Implement filtering functionality, user interface  
   **Total Estimated Time:** 55 hours  
   **Weekly Budget:** ~11 hours  
   **Repository:** [Link to Repository](https://github.com/christinapeng1/brown-housing-lottery)
